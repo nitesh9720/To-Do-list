@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const _ = require("lodash");
 // const date = require(__dirname + "/date.js");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -83,7 +84,7 @@ app.post("/delete", function (req, res) {
   }
 });
 app.get("/:customName", function (req, res) {
-  const customListName = req.params.customName;
+  const customListName = _.capitalize(req.params.customName);
 
   List.findOne({ listName: customListName }, function (err, foundLists) {
     if (!err) {
