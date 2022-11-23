@@ -64,9 +64,23 @@ app.post("/", function (req, res) {
   }
 });
 app.post("/delete", function (req, res) {
-  Item.findByIdAndRemove(req.body.checkbox, function (err) {
-    res.redirect("/");
-  });
+  const listTitle = req.body.listName;
+  // console.log(listTitle);
+  if (listTitle == "Today") {
+    Item.findByIdAndRemove(req.body.checkbox, function (err) {
+      res.redirect("/");
+    });
+  } else {
+    List.findOneAndUpdate(
+      { listName: listTitle },
+      { $pull: { items: { _id: req.body.checkbox } } },
+      function (err, foundList) {
+        if (!err) {
+          res.redirect("/" + listTitle);
+        }
+      }
+    );
+  }
 });
 app.get("/:customName", function (req, res) {
   const customListName = req.params.customName;
