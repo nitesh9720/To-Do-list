@@ -90,7 +90,19 @@ input[type="text"]:focus {
 }
 
 footer {
+
   color: white;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;   /* Height of the footer */
+  background: rgb(11, 141, 241);
+}
+
+#about-content{
+  color: blue;
+
 }
